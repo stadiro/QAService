@@ -2,7 +2,7 @@
 
 ### Описание
 
-Небольшой REST API‑сервис для работы с вопросами и ответами.  
+REST API‑сервис для работы с вопросами и ответами.  
 Две основные сущности:
 
 - **Question**
@@ -36,9 +36,8 @@
 
 ### Запуск через Docker Compose
 
-Нужны установленный Docker и Docker Compose.
 
-Из корня проекта:
+
 
 ```bash
 docker-compose up --build
@@ -58,45 +57,6 @@ curl http://localhost:8080/questions
 ```
 
 Если всё ок, вернётся пустой JSON‑массив `[]`.
-
----
-
-### Локальный запуск без Docker
-
-Если удобнее запускать всё локально:
-
-1. **PostgreSQL**
-   - Поднимите Postgres.
-   - Создайте БД `qa_service`.
-   - Можно использовать те же креды, что и в docker‑compose:
-     - **user**: `postgres`
-     - **password**: `postgres`
-
-2. **Миграции (goose)**
-
-```bash
-go install github.com/pressly/goose/v3/cmd/goose@latest
-
-goose -dir ./db/migrations postgres "host=localhost user=postgres password=postgres dbname=qa_service port=5432 sslmode=disable" up
-```
-
-3. **Запуск приложения**
-
-**PowerShell**:
-
-```powershell
-$env:DATABASE_DSN = "host=localhost user=postgres password=postgres dbname=qa_service port=5432 sslmode=disable"
-go run .\main.go
-```
-
-**cmd.exe**:
-
-```cmd
-set DATABASE_DSN=host=localhost user=postgres password=postgres dbname=qa_service port=5432 sslmode=disable
-go run .\main.go
-```
-
-Сервис поднимется на `http://localhost:8080`.
 
 ---
 
