@@ -37,8 +37,6 @@ REST API‑сервис для работы с вопросами и ответ�
 ### Запуск через Docker Compose
 
 
-
-
 ```bash
 docker-compose up --build
 ```
@@ -75,32 +73,11 @@ curl -X POST http://localhost:8080/questions ^
 ```bash
 curl -X POST http://localhost:8080/questions/1/answers ^
   -H "Content-Type: application/json" ^
-  -d "{\"user_id\": \"user-123\", \"text\": \"Это ORM для Go.\"}"
+  -d "{\"user_id\": \"user-123\", \"text\": \"Это ORM для Go\"}"
 ```
 
 **Получить вопрос с ответами**
 
 ```bash
 curl http://localhost:8080/questions/1
-```
-
----
-
-### Тесты
-
-HTTP‑хэндлеры покрыты базовым интеграционным тестом (`httptest` + GORM).
-
-Тест использует PostgreSQL. Нужна отдельная тестовая БД (по умолчанию `qa_service_test`):
-
-1. Создать БД `qa_service_test`.
-2. (Опционально) явно задать DSN через переменную окружения:
-
-```powershell
-$env:TEST_DATABASE_DSN = "host=localhost user=postgres password=postgres dbname=qa_service_test port=5432 sslmode=disable"
-```
-
-3. Запустить тесты:
-
-```bash
-go test ./...
 ```
